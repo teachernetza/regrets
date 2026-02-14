@@ -49,7 +49,7 @@
             color: var(--text-main); line-height: 1.6; overflow-x: hidden; display: flex;
         }
 
-        h1, h2, h3 { font-family: 'Lora', serif; color: var(--rc-navy); }
+        h1, h2, h3, h4 { font-family: 'Lora', serif; color: var(--rc-navy); }
         p { margin-bottom: 1rem; }
         strong { font-weight: 700; color: var(--rc-navy); }
         
@@ -172,31 +172,39 @@
         .example-en { font-weight: 700; color: var(--rc-navy); font-size: 1.1rem; margin-top: 10px; }
         .example-es { color: var(--text-muted); font-style: italic; font-size: 0.95rem; }
 
-        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 2rem; }
-        .comp-card { background: var(--rc-white); border: 2px solid var(--rc-gray); border-radius: var(--radius-md); padding: 20px; text-align: center; }
-        .comp-card h4 { font-family: 'Poppins'; color: var(--text-muted); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 15px; }
-        
-        @media (max-width: 768px) { .comparison-grid { grid-template-columns: 1fr; } }
-
         /* ==========================================================================
-           6. AUDIO LAB STYLES
+           6. PRACTICE LAB STYLES (NEW)
            ========================================================================== */
-        .audio-item { display: flex; align-items: center; gap: 20px; padding: 15px 20px; border-bottom: 1px solid var(--rc-gray); transition: 0.2s; }
-        .audio-item:hover { background: var(--rc-bg); border-radius: var(--radius-md); }
-        .audio-item:last-child { border-bottom: none; }
+        .section-header {
+            font-size: 1.4rem; font-weight: 700; color: var(--rc-navy);
+            margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--rc-gray);
+        }
+        .section-desc { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+
+        .practice-item {
+            background: var(--rc-white); border: 1px solid var(--rc-gray);
+            border-radius: var(--radius-md); padding: 20px; margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02); transition: 0.3s;
+        }
+        .practice-item:hover { border-color: var(--rc-navy-light); box-shadow: var(--shadow-sm); }
+        
+        .audio-row { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 15px; }
         
         .btn-play {
             width: 50px; height: 50px; border-radius: 50%; border: none; background: var(--rc-navy);
             color: var(--rc-white); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
-            box-shadow: var(--shadow-sm); transition: 0.2s; flex-shrink: 0;
+            box-shadow: var(--shadow-sm); transition: 0.2s; flex-shrink: 0; margin-top: 5px;
         }
         .btn-play:active { transform: scale(0.9); }
         .btn-play.playing { animation: pulseNavy 1.5s infinite; background: var(--success); }
         @keyframes pulseNavy { 0% { box-shadow: 0 0 0 0 rgba(26,43,76,0.5); } 70% { box-shadow: 0 0 0 15px rgba(26,43,76,0); } 100% { box-shadow: 0 0 0 0 rgba(26,43,76,0); } }
 
-        .type-badge { font-size: 0.75rem; font-weight: 800; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; margin-left: 10px; vertical-align: middle; }
-        .badge-wish { background: rgba(26,43,76,0.1); color: var(--rc-navy); }
-        .badge-should { background: rgba(245,158,11,0.1); color: var(--warning); }
+        .teacher-note {
+            background: rgba(245, 158, 11, 0.05); border-left: 3px solid var(--warning);
+            padding: 12px 15px; border-radius: 0 8px 8px 0; font-size: 0.9rem;
+            color: #92400E; display: flex; gap: 10px; align-items: flex-start;
+        }
+        .teacher-note i { margin-top: 3px; color: var(--warning); }
 
         /* ==========================================================================
            7. EXAM ENGINE STYLES
@@ -285,7 +293,7 @@
 
         <nav class="nav-menu">
             <button class="nav-link active" onclick="navTo('home-theory', this)"><i class="fas fa-book-reader"></i> 1. Home & Theory</button>
-            <button class="nav-link" onclick="navTo('audio-lab', this)"><i class="fas fa-headphones"></i> 2. Audio Lab</button>
+            <button class="nav-link" onclick="navTo('practice-lab', this)"><i class="fas fa-chalkboard-teacher"></i> 2. Practice Lab</button>
             <button class="nav-link" onclick="navTo('final-test', this)"><i class="fas fa-laptop-code"></i> 3. Final Test</button>
         </nav>
 
@@ -310,7 +318,7 @@
                     <div class="hero-divider"></div>
                     
                     <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2rem;">
-                        En este módulo uniremos dos conceptos vitales: <strong>Should have</strong> (Crítica/Deber) y <strong>Wish + Past Perfect</strong> (Deseo/Lamento). Ambos hablan de un pasado que no podemos cambiar, pero la intención es distinta.
+                        En este módulo uniremos dos conceptos vitales: <strong>Should have</strong> (Crítica) y <strong>Wish + Past Perfect</strong> (Lamento). Ambos hablan de un pasado que no podemos cambiar, pero la intención emocional es distinta.
                     </p>
 
                     <h2 style="font-size:1.8rem; margin-top:2.5rem; margin-bottom:1rem;">The Grammar Formula</h2>
@@ -324,32 +332,19 @@
                             <div class="example-es">Desearía haber estudiado más. (Lamento personal).</div>
                         </div>
                     </div>
-
-                    <div class="comparison-grid">
-                        <div class="comp-card" style="border-color: var(--rc-navy);">
-                            <h4>The Regret (Wish)</h4>
-                            <p style="font-weight:600; color:var(--text-main); font-size:1.1rem;">"I wish I hadn't eaten so much."</p>
-                            <p style="font-size:0.9rem; color:var(--text-muted);">Enfoque emocional. Deseas que la realidad pasada fuera distinta porque te sientes mal.</p>
-                        </div>
-                        <div class="comp-card" style="border-color: var(--warning);">
-                            <h4>The Criticism (Should have)</h4>
-                            <p style="font-weight:600; color:var(--text-main); font-size:1.1rem;">"I shouldn't have eaten so much."</p>
-                            <p style="font-size:0.9rem; color:var(--text-muted);">Enfoque lógico. Reconoces que cometiste un error y criticas tu propia acción.</p>
-                        </div>
-                    </div>
                     
                     <div style="background: rgba(16,185,129,0.1); border-left: 4px solid var(--success); padding: 15px; border-radius: 8px; margin-top: 2rem;">
-                        <strong><i class="fas fa-lightbulb" style="color:var(--success);"></i> Pro Tip:</strong> Ambos requieren forzosamente el Verbo en Pasado Participio (V3). ¡Nunca uses Pasado Simple aquí!
+                        <strong><i class="fas fa-lightbulb" style="color:var(--success);"></i> Pro Tip:</strong> El arrepentimiento requiere el Verbo en Pasado Participio (V3). Jamás uses el verbo base después de "had".
                     </div>
                 </div>
             </section>
 
-            <section id="audio-lab" class="view-section">
+            <section id="practice-lab" class="view-section">
                 <div class="card">
-                    <h2 style="font-size:2rem; margin-bottom:1rem;">Audio Laboratory</h2>
-                    <p style="color:var(--text-muted); margin-bottom:2rem;">Compara la pronunciación entre los lamentos con "Wish" y las críticas con "Should". Escucha con atención la contracción "had" ('d).</p>
+                    <h2 style="font-size:2.2rem; margin-bottom:1rem;">Practice & Audio Lab</h2>
+                    <p style="color:var(--text-muted); margin-bottom:1rem;">Reproduce cada audio. Lee la nota del profesor para entender el contexto exacto de cuándo y por qué usar esa frase.</p>
                     
-                    <div id="audio-container" style="display:flex; flex-direction:column; gap:5px;">
+                    <div id="practice-container">
                         </div>
                 </div>
             </section>
@@ -461,23 +456,44 @@
             location.reload();
         }
 
-        // --- 1. DATOS DE AUDIO (15 Oraciones Mixtas) ---
-        const audioDB = [
-            { type: 'wish', en: "I wish I had brought my umbrella.", es: "Desearía haber traído mi paraguas." },
-            { type: 'should', en: "I should have checked the weather.", es: "Debí haber revisado el clima." },
-            { type: 'wish', en: "She wishes she hadn't said that.", es: "Ella desearía no haber dicho eso." },
-            { type: 'should', en: "She shouldn't have insulted him.", es: "Ella no debió haberlo insultado." },
-            { type: 'wish', en: "We wish we had stayed longer.", es: "Desearíamos habernos quedado más tiempo." },
-            { type: 'wish', en: "I wish I had known about the party.", es: "Desearía haber sabido sobre la fiesta." },
-            { type: 'should', en: "You should have told me earlier.", es: "Debiste haberme dicho antes." },
-            { type: 'wish', en: "He wishes he had studied engineering.", es: "Él desearía haber estudiado ingeniería." },
-            { type: 'wish', en: "I wish I hadn't eaten so much cake.", es: "Desearía no haber comido tanto pastel." },
-            { type: 'should', en: "I shouldn't have eaten so much cake.", es: "No debí haber comido tanto pastel." },
-            { type: 'wish', en: "They wish they had saved more money.", es: "Ellos desearían haber ahorrado más dinero." },
-            { type: 'should', en: "They shouldn't have bought that expensive car.", es: "No debieron haber comprado ese auto caro." },
-            { type: 'wish', en: "I wish I had taken your advice.", es: "Desearía haber tomado tu consejo." },
-            { type: 'should', en: "You should have listened to me.", es: "Debiste haberme escuchado." },
-            { type: 'wish', en: "I wish I hadn't lost my phone.", es: "Desearía no haber perdido mi teléfono." }
+        // --- 1. DATOS DE PRÁCTICA CON EXPLICACIÓN (Audio Lab) ---
+        const practiceDB = [
+            {
+                section: "1. Affirmative Wishes (Lo que NO hiciste)",
+                desc: "Usamos 'had + V3' para desear haber hecho algo positivo que en la realidad omitimos.",
+                items: [
+                    { en: "I wish I had brought my umbrella.", es: "Desearía haber traído mi paraguas.",
+                      note: "Contexto: Está lloviendo fuerte y te estás mojando. No lo trajiste y te arrepientes." },
+                    { en: "She wishes she had listened to you.", es: "Ella desearía haberte escuchado.",
+                      note: "Contexto: Ella ignoró tu consejo, todo salió mal, y ahora entiende su error." },
+                    { en: "We wish we had reserved a table.", es: "Desearíamos haber reservado una mesa.",
+                      note: "Contexto: Llegaron al restaurante, está lleno y no hay lugar para ustedes." }
+                ]
+            },
+            {
+                section: "2. Negative Wishes (Lo que SÍ hiciste)",
+                desc: "Usamos 'hadn't + V3' para desear borrar una acción que lamentablemente sí cometimos.",
+                items: [
+                    { en: "I wish I hadn't said that.", es: "Desearía no haber dicho eso.",
+                      note: "Contexto: Insultaste a alguien en una discusión y ahora te sientes terrible." },
+                    { en: "He wishes he hadn't quit his job.", es: "Él desearía no haber renunciado a su trabajo.",
+                      note: "Contexto: Actuó impulsivamente, está desempleado y extraña su sueldo." },
+                    { en: "You wish you hadn't stayed up so late, right?", es: "Deseas no haberte desvelado, ¿verdad?",
+                      note: "Contexto: Estás cabeceando en clase porque te dormiste a las 3 AM viendo series." }
+                ]
+            },
+            {
+                section: "3. Advanced Native Expressions",
+                desc: "Frases de alto nivel (C1/C2) que los nativos usan para hablar de arrepentimiento.",
+                items: [
+                    { en: "If only I had known!", es: "¡Si tan solo lo hubiera sabido!",
+                      note: "'If only' es la versión dramática y fuerte de 'I wish'. Significa exactamente lo mismo." },
+                    { en: "I deeply regret not having gone.", es: "Lamento profundamente no haber ido.",
+                      note: "Usa 'regret + verbo en -ing' para sonar extremadamente formal y educado." },
+                    { en: "In hindsight, I should have done it differently.", es: "En retrospectiva, debí haberlo hecho diferente.",
+                      note: "'In hindsight' es el conector perfecto cuando analizas tus errores pasados con la mente fría." }
+                ]
+            }
         ];
 
         // --- 2. DATOS DEL EXAMEN (15 Reactivos: 10 MC, 5 Typing) ---
@@ -505,7 +521,7 @@
         let quizState = { active: false, index: 0, score: 0, selectedOpt: null, answered: false };
         let attemptsLeft = 3;
 
-        // --- 4. MOTOR TTS (AUDIO) ---
+        // --- 4. MOTOR TTS Y RENDERIZADO DEL LAB ---
         const synth = window.speechSynthesis;
         let engVoice = null;
 
@@ -529,20 +545,31 @@
             synth.speak(u);
         }
 
-        // Renderizar Audios
-        function renderAudios() {
-            const container = document.getElementById('audio-container');
+        // Renderizar el Practice Lab con secciones
+        function renderPracticeLab() {
+            const container = document.getElementById('practice-container');
             let html = '';
-            audioDB.forEach((item) => {
-                let badge = item.type === 'wish' ? `<span class="type-badge badge-wish">WISH</span>` : `<span class="type-badge badge-should">SHOULD</span>`;
-                html += `
-                <div class="audio-item">
-                    <button class="btn-play" onclick="playSound('${item.en.replace(/'/g, "\\'")}', this)"><i class="fas fa-play"></i></button>
-                    <div>
-                        <div style="font-size:1.1rem; font-weight:700; color:var(--rc-navy); font-family:'Lora';">${item.en} ${badge}</div>
-                        <div style="font-size:0.9rem; color:var(--text-muted); font-style:italic;">${item.es}</div>
-                    </div>
-                </div>`;
+            
+            practiceDB.forEach(sec => {
+                html += `<h3 class="section-header">${sec.section}</h3>`;
+                html += `<p class="section-desc">${sec.desc}</p>`;
+                
+                sec.items.forEach(item => {
+                    html += `
+                    <div class="practice-item">
+                        <div class="audio-row">
+                            <button class="btn-play" onclick="playSound('${item.en.replace(/'/g, "\\'")}', this)"><i class="fas fa-play"></i></button>
+                            <div>
+                                <div style="font-size:1.15rem; font-weight:700; color:var(--rc-navy); font-family:'Lora';">${item.en}</div>
+                                <div style="font-size:0.95rem; color:var(--text-muted); font-style:italic; margin-top:3px;">${item.es}</div>
+                            </div>
+                        </div>
+                        <div class="teacher-note">
+                            <i class="fas fa-lightbulb"></i>
+                            <div><strong>Teacher's Note:</strong> ${item.note}</div>
+                        </div>
+                    </div>`;
+                });
             });
             container.innerHTML = html;
         }
@@ -576,13 +603,12 @@
 
         // --- 6. MOTOR DEL EXAMEN (15 Preguntas) ---
         function startQuiz() {
-            // Check attempts memory
             const memAttempts = localStorage.getItem('rc_quiz_attempts');
             attemptsLeft = memAttempts ? parseInt(memAttempts) : 3;
 
             if(attemptsLeft <= 0) {
-                showToast("Ya no te quedan intentos. Reiniciando contador de sistema...", true);
-                attemptsLeft = 3; // Reset para demo
+                showToast("Reiniciando contador del sistema...", true);
+                attemptsLeft = 3; 
             }
 
             document.getElementById('test-welcome').style.display = 'none';
@@ -612,7 +638,6 @@
             btn.innerText = "CHECK ANSWER";
             btn.disabled = true;
 
-            // UI Progress
             document.getElementById('ui-progress').innerText = `${quizState.index + 1} / ${quizDB.length}`;
             document.getElementById('ui-score').innerText = `${quizState.score} pts`;
             document.getElementById('ui-bar').style.width = `${((quizState.index) / quizDB.length) * 100}%`;
@@ -651,7 +676,6 @@
             const btn = document.getElementById('btn-submit');
 
             if (!quizState.answered) {
-                // FASE 1: EVALUAR
                 quizState.answered = true;
                 let isCorrect = false;
 
@@ -666,7 +690,6 @@
                     }
                 } else {
                     const input = document.getElementById('type-ans');
-                    // Limpieza de texto ingresado
                     const userVal = input.value.trim().toLowerCase().replace(/‘|’|´/g, "'").replace(/[.,]/g, "");
                     input.readOnly = true;
                     if (q.ans.includes(userVal)) {
@@ -679,11 +702,9 @@
                 }
 
                 if (isCorrect) quizState.score++;
-                
                 btn.innerText = (quizState.index === quizDB.length - 1) ? "FINISH EXAM" : "NEXT QUESTION";
 
             } else {
-                // FASE 2: AVANZAR
                 quizState.index++;
                 if (quizState.index < quizDB.length) {
                     renderQuestion();
@@ -709,7 +730,7 @@
                 circle.style.color = "var(--success)";
                 msg.innerText = `¡Certificación aprobada, ${studentName}! Eres oficialmente un experto en los lamentos del pasado.`;
                 confetti({ particleCount: 200, spread: 90, origin: { y: 0.5 } });
-                attemptsLeft = 3; // Reset wins
+                attemptsLeft = 3; 
             } else {
                 attemptsLeft--;
                 localStorage.setItem('rc_quiz_attempts', attemptsLeft.toString());
@@ -720,7 +741,7 @@
                     msg.innerText = `Obtuviste ${quizState.score} de ${quizDB.length}. Te quedan ${attemptsLeft} intento(s) para lograr el 80%.`;
                 } else {
                     msg.innerText = `Has agotado tus intentos. El sistema reiniciará tus oportunidades, pero debes repasar la teoría.`;
-                    localStorage.setItem('rc_quiz_attempts', '3'); // reset for next time
+                    localStorage.setItem('rc_quiz_attempts', '3'); 
                 }
             }
 
@@ -731,7 +752,7 @@
         window.onload = () => {
             checkLogin();
             initVoices();
-            renderAudios();
+            renderPracticeLab();
         };
 
     </script>
